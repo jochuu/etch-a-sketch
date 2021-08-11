@@ -1,0 +1,16 @@
+::selection {
+  background-color: #ffffff;
+}
+
+.grid-container {
+  display: grid;
+  width: 400px;
+}
+
+.grid-cell {
+  color: red;
+}
+
+.painted-cell {
+  background: black;
+}
