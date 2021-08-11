@@ -1,14 +1,27 @@
 ::selection {
   background-color: #ffffff;
 }
+.header {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+.container {
+  max-width: 800px;
+  max-height: 800px;
+  margin: 0 auto;
+}
 
 .grid-container {
   display: grid;
-  width: 400px;
+  background-color: #ffffcc;
+  margin: 0;
+  padding: 0;
 }
 
 .grid-cell {
-  color: red;
+  display: grid;
+  height: 50px;
 }
 
 .painted-cell {

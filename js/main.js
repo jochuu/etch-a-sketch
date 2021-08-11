@@ -1,16 +1,13 @@
 function generateGrid(size) {
-    let gridSize = Math.sqrt(size);
-    if (gridSize % 1 !== 0) return false; //Check to see if value can be made into a grid.
     
     let gridContainer = document.createElement('div');
     gridContainer.classList.add('grid-container');
-    gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-    gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < (size*size); i++) {
         let gridCell = document.createElement('div');
         gridCell.classList.add('grid-cell');
-        gridCell.textContent = '.';
         gridCell.addEventListener('mouseover', function (e) {
             gridCell.classList.add('painted-cell');
           });;
@@ -19,6 +16,13 @@ function generateGrid(size) {
     document.querySelector('.container').appendChild(gridContainer);
 }
 
+function resetGrid() {
+    document.querySelectorAll('.painted-cell').forEach(cell => cell.classList.remove('painted-cell'));
+}
+
 (function() {
-    generateGrid(400);
+    generateGrid(16);
+    document.querySelector('#resetBtn').addEventListener('click', function(e) {
+        resetGrid();
+    });
 })();
