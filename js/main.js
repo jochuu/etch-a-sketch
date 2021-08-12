@@ -1,4 +1,4 @@
-let penColour = 'black';
+let penType = '';
 let drag = false;
 
 function generateGrid(size) {
@@ -19,6 +19,12 @@ function generateGridCell(container) {
 }
 
 function clearGrid() {
+    let root = document.documentElement;
+    let backgroundPicker = document.querySelector('#background');
+
+    // set background colour on css for fade
+    root.style.setProperty('--grid-bg-color', backgroundPicker.value);
+
     document.querySelectorAll('.painted-cell').forEach(cell => {
         fadeGrid(cell);
         setTimeout(function () {
@@ -31,6 +37,7 @@ function clearGrid() {
             cell.style.backgroundColor = '';
           }, 1500);
     });
+    document.querySelector('.grid-container').style.backgroundColor = backgroundPicker.value;
 }
 
 function fadeGrid(item) { // Generate number between 1 and 5, add fade class to randomise fade times.
@@ -48,37 +55,44 @@ function generateNewGrid() {
     setupEventListeners();
 }
 function setupEventListeners() {
+    let penType = '';
     document.querySelector('#clearBtn').onclick = () => clearGrid();
     document.querySelector('#newGridBtn').onclick = () => generateNewGrid();
-    document.querySelector('#blackPenBtn').onclick = () => setBlackInk();
-    document.querySelector('#rainbowPenBtn').onclick = () => setRainbowInk();
+    document.querySelector('#penBtn').onclick = () => penType = 'default';
+    document.querySelector('#rainbowPenBtn').onclick = () => penType = 'rainbow';
+    // document.querySelector('#shadePenBtn').onclick = () => penType = 'shade';
+    document.querySelector('#eraserBtn').onclick = () => penType = 'eraser';
+    document.querySelector('#background').oninput = (e) => {
+        document.querySelectorAll('.grid-cell').forEach(cell => {
+            if(!cell.classList.contains('painted-cell')) {
+            cell.style.backgroundColor = document.querySelector('#background').value;
+        }});
+    };
     document.querySelectorAll('.grid-cell').forEach(cell => {
-        cell.onclick = (e) => draw(e);
-        cell.onmouseover = (e) => draw(e);
+        cell.onmousedown = (e) => draw(e, penType);
+        cell.onmouseover = (e) => draw(e, penType);
+        cell.oncontextmenu = (e) => draw(e, 'eraser');
     });
 }
 
-function draw(event) {
-    console.log(event.type);
-    if (event.buttons > 0 || event.type === 'click') {
-    event.target.classList.add('painted-cell');
-    switch (penColour) {
-        case 'black':
-            return event.target.style.backgroundColor = 'black';
-        case 'rainbow':
-            return event.target.style.backgroundColor = generateRandomColour();
-        default:
-            return event.target.style.backgroundColor = 'black';
+function draw(event, penType) {
+    event.preventDefault();
+    if (event.buttons > 0) {
+        event.target.classList.add('painted-cell');
+        switch (penType) {
+            case 'rainbow':
+                return event.target.style.backgroundColor = generateRandomColour();
+            case 'eraser':
+                event.target.classList.remove('painted-cell');
+                return event.target.style.backgroundColor = document.querySelector('#background').value;
+            default:
+                return event.target.style.backgroundColor = document.querySelector('#pen').value;
+        }
     }
 }
-}
 
-function setBlackInk() {
-    return penColour = 'black';
-}
-
-function setRainbowInk() {
-    return penColour = 'rainbow';
+function setPenType(type) {
+    penType = type;
 }
 
 function generateRandomColour() {

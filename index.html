@@ -5,12 +5,29 @@
         <link rel='stylesheet' href='css/main.css'>
     </head>
     <body>
-        <div class='header'><button id='clearBtn'>clear</button>
+        <div class='header'>
+            <button id='clearBtn'>clear</button>
             <button id='newGridBtn'>new grid</button>
-            <button id='blackPenBtn'>black ink</button>
-            <button id='rainbowPenBtn'>rainbow ink</button></div>
+            <button id='penBtn'>pen mode</button>
+            <button id='rainbowPenBtn'>rainbow mode</button>
+            <!-- <button id='shadePenBtn'>shade mode</button> -->
+            <button id='eraserBtn'>eraser</button>
+        </div>
             <div id='gridSize'></div>
         </div>
+        <div>
+            <input type="color" id="pen" name="pen"
+                   value="#000000">
+            <label for="pen">Pen colour</label>
+        </div>
+        
+        <div>
+            <input type="color" id="background" name="background"
+                    value="#ffffcc">
+            <label for="background">Background colour</label>
+        </div>
+
+        <div>Left click and drag to paint, right click to remove a square</div>
 
         <div class='container'>        
         </div>

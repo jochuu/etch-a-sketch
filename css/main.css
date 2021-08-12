@@ -3,7 +3,7 @@
 }
 
 :root {
-  --grid-bg-color: #ffffcc;
+  --grid-bg-color: ffffcc;
 }
 
 .header {
@@ -20,14 +20,10 @@
 }
 .grid-container {
   display: grid;
-  background-color: #ffffcc;
+  background-color: var(--grid-bg-color) !important;
   margin: 0 auto;
   width: 500px;
   height: 500px;
-}
-
-.painted-cell {
-  background: black;
 }
 
 .clear-fade-1 {
@@ -37,25 +33,20 @@
 
 .clear-fade-2 {
   background-color: var(--grid-bg-color) !important;
-  transition: background-color 1.4s ease;
+  transition: background-color 1.3s ease;
 }
 
 .clear-fade-3 {
   background-color: var(--grid-bg-color) !important;
-  transition: background-color 1.3s ease;
+  transition: background-color 1.1s ease;
 }
 
 .clear-fade-4 {
   background-color: var(--grid-bg-color) !important;
-  transition: background-color 1.2s ease;
+  transition: background-color 0.9s ease;
 }
 
 .clear-fade-5 {
   background-color: var(--grid-bg-color) !important;
-  transition: background-color 1.1s ease;
-}
-
-.clear-fade-6 {
-  background-color: var(--grid-bg-color) !important;
-  transition: background-color 1s ease;
+  transition: background-color 0.7s ease;
 }
