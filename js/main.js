@@ -47,21 +47,31 @@ function fadeGrid(item) { // Generate number between 1 and 5, add fade class to 
 
 
 function generateNewGrid() {
-    let newGridSize = prompt('Insert new grid size');
-    if (newGridSize.match(/^[0-9]+$/) === null) newGridSize = 16;
-    if (newGridSize > 100) newGridSize = 16;
+    let newGridSize = document.querySelector('#gridSize').value;
     document.querySelector('.grid-container').remove();
     generateGrid(newGridSize);
     setupEventListeners();
 }
+
+
 function setupEventListeners() {
     let penType = '';
     document.querySelector('#clearBtn').onclick = () => clearGrid();
     document.querySelector('#newGridBtn').onclick = () => generateNewGrid();
-    document.querySelector('#penBtn').onclick = () => penType = 'default';
-    document.querySelector('#rainbowPenBtn').onclick = () => penType = 'rainbow';
+    document.querySelector('#gridSize').oninput = (e) => document.querySelector('#gridSizeValue').textContent = `${document.querySelector('#gridSize').value} x ${document.querySelector('#gridSize').value}`;
+    document.querySelector('#penBtn').onclick = () => {
+        penType = 'default'
+        applySelectedClass(penType);
+    };
+    document.querySelector('#rainbowPenBtn').onclick = () => {
+        penType = 'rainbow';
+        applySelectedClass(penType);
+    }
     // document.querySelector('#shadePenBtn').onclick = () => penType = 'shade';
-    document.querySelector('#eraserBtn').onclick = () => penType = 'eraser';
+    document.querySelector('#eraserBtn').onclick = () => {
+        penType = 'eraser';
+        applySelectedClass(penType);
+    }
     document.querySelector('#background').oninput = (e) => {
         document.querySelectorAll('.grid-cell').forEach(cell => {
             if(!cell.classList.contains('painted-cell')) {
@@ -73,6 +83,28 @@ function setupEventListeners() {
         cell.onmouseover = (e) => draw(e, penType);
         cell.oncontextmenu = (e) => draw(e, 'eraser');
     });
+}
+
+function applySelectedClass(penType) {
+    console.log(penType);
+    switch(penType) {
+        case 'rainbow':
+        document.querySelector('#rainbowPenBtn').classList.add('selected');
+        document.querySelector('#penBtn').classList.remove('selected');
+        document.querySelector('#eraserBtn').classList.remove('selected');
+        return true;
+        console.log('here');
+        case 'eraser':
+        document.querySelector('#eraserBtn').classList.add('selected');
+        document.querySelector('#rainbowPenBtn').classList.remove('selected');
+        document.querySelector('#penBtn').classList.remove('selected');
+        return true;
+        default:
+        document.querySelector('#penBtn').classList.add('selected');
+        document.querySelector('#rainbowPenBtn').classList.remove('selected');
+        document.querySelector('#eraserBtn').classList.remove('selected');
+        return true;
+    }
 }
 
 function draw(event, penType) {

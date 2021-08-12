@@ -2,35 +2,39 @@
     <link>
         <meta charset='UTF-8'>
         <title>Etch-a-sketch</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel='stylesheet' href='css/main.css'>
     </head>
-    <body>
         <div class='header'>
-            <button id='clearBtn'>clear</button>
-            <button id='newGridBtn'>new grid</button>
-            <button id='penBtn'>pen mode</button>
-            <button id='rainbowPenBtn'>rainbow mode</button>
-            <!-- <button id='shadePenBtn'>shade mode</button> -->
-            <button id='eraserBtn'>eraser</button>
+            <h1>Etch-a-sketch</h1>
         </div>
-            <div id='gridSize'></div>
-        </div>
-        <div>
-            <input type="color" id="pen" name="pen"
-                   value="#000000">
-            <label for="pen">Pen colour</label>
-        </div>
-        
-        <div>
-            <input type="color" id="background" name="background"
-                    value="#ffffcc">
-            <label for="background">Background colour</label>
-        </div>
+        <div class='main'>
+            <div class='btn'><label for="background">Background colour</label>
+                <input type="color" id="background" name="background"
+                        value="#fcfcee"></div>
+            <div class='container'></div>
+            <div class='menu'>
+                <label for="pen">Pen</label>
+                <button class="" id='penBtn'><i class='fas fa-pen fa-2x'></i><input type="color" id="pen" name="pen"
+                    value="#000000"></button>
+               
+                    <label>Rainbow Pen</label>
+                <button class="" id='rainbowPenBtn'><i class='fas fa-pen fa-2x rainbow-text'></i></button>
+                <!-- <button id='shadePenBtn'>shade mode</button> -->
+                <label>Eraser</label>
+                <button  id='eraserBtn'><i class='fas fa-eraser fa-2x'></i></button>
+                <div>
+                    <button id='clearBtn'>clear</button>
+                    <button id='newGridBtn'>new grid</button>
+                    <input type="range" id="gridSize" name="grid"
+                    min="1" max="100" value='16'>
+                    <div id='gridSizeValue'>16 x 16</div>
+                </div>
 
-        <div>Left click and drag to paint, right click to remove a square</div>
-
-        <div class='container'>        
+            </div>
         </div>
-    </body>
+        <div class='footer'>
+            <h2>The Odin Project</h2>
+        </div>
     <script src='js/main.js'></script>
 </html>

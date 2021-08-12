@@ -3,20 +3,89 @@
 }
 
 :root {
-  --grid-bg-color: ffffcc;
+  --grid-bg-color: #fcfcee;
+  background-color: #fafae5;
+  font-family: monospace;
+  color: rgb(62, 166, 255);
 }
 
+button {
+  display: flex;
+  flex-direction: column;
+  color: rgb(62, 166, 255);
+  font-weight: 500;
+  font-family: monospace;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 14px;
+  outline: none;
+  border: 1px solid rgb(62, 166, 255);
+  border-radius: 2px;
+  padding: 9px 15px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.selected {
+  border: 2px solid rgb(223, 32, 131); /* Green */
+}
+.btn {
+  display: block;
+  color: rgb(62, 166, 255);
+  font-family: monospace;
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: 1px solid rgb(62, 166, 255);
+  border-radius: 2px;
+  padding: 10px 0px 0px 20px;
+  max-width: 160px;
+}
+input[type="color"] {
+  margin: 0 auto;
+  padding: 0 auto;
+  background: none;
+  color: inherit;
+  border: none;
+  width: 30px;
+  height: 30px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
 .header {
   display: flex;
   justify-content: center;
   padding-bottom: 20px;
 }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 10px 0 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
 .container {
   -webkit-user-drag: none;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 10px 0 10px;
 }
 .grid-container {
   display: grid;
@@ -24,6 +93,13 @@
   margin: 0 auto;
   width: 500px;
   height: 500px;
+  border-bottom: 1px solid rgb(175, 218, 255);
+  border-right: 1px solid rgb(175, 218, 255);
+}
+
+.grid-cell {
+  border-top: 1px solid rgb(175, 218, 255);
+  border-left: 1px solid rgb(175, 218, 255);
 }
 
 .clear-fade-1 {
@@ -49,4 +125,32 @@
 .clear-fade-5 {
   background-color: var(--grid-bg-color) !important;
   transition: background-color 0.7s ease;
+}
+
+.rainbow-text {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgb(32, 223, 124),
+    rgb(223, 32, 131),
+    rgb(208, 223, 32),
+    rgb(32, 223, 175),
+    rgb(223, 32, 131)
+  );
+  background-size: 800% 800%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 3s ease infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 25%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
