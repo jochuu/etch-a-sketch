@@ -1,5 +1,4 @@
 let penType = '';
-let drag = false;
 
 function generateGrid(size) {
     let gridContainer = document.createElement('div');
@@ -93,7 +92,6 @@ function applySelectedClass(penType) {
         document.querySelector('#penBtn').classList.remove('selected');
         document.querySelector('#eraserBtn').classList.remove('selected');
         return true;
-        console.log('here');
         case 'eraser':
         document.querySelector('#eraserBtn').classList.add('selected');
         document.querySelector('#rainbowPenBtn').classList.remove('selected');
@@ -121,10 +119,6 @@ function draw(event, penType) {
                 return event.target.style.backgroundColor = document.querySelector('#pen').value;
         }
     }
-}
-
-function setPenType(type) {
-    penType = type;
 }
 
 function generateRandomColour() {
