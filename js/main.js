@@ -15,7 +15,6 @@ function generateGrid(size) {
 function generateGridCell(container) {
     let gridCell = document.createElement('div');
         gridCell.classList.add('grid-cell');
-        gridCell.setAttribute('draggable', 'false');
         return container.appendChild(gridCell);
 }
 
