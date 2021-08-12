@@ -6,8 +6,6 @@ function generateGrid(size) {
     gridContainer.classList.add('grid-container');
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-    gridContainer.setAttribute('draggable', 'false');
-    document.querySelector('.container').setAttribute('draggable', 'false');
     for (let i = 0; i < (size*size); i++) {
         generateGridCell(gridContainer);
     }
