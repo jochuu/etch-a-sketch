@@ -59,6 +59,7 @@ function fadeGrid(item) { // Generate number between 1 and 5, add fade class to 
 function generateNewGrid() {
     let newGridSize = prompt('Insert new grid size');
     if (newGridSize.match(/^[0-9]+$/) === null) newGridSize = 16;
+    if (newGridSize > 100) newGridSize = 16;
     document.querySelector('.grid-container').remove();
     
     generateGrid(newGridSize);
