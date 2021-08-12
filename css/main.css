@@ -18,3 +18,33 @@
 .painted-cell {
   background: black;
 }
+
+.clear-fade-1 {
+  background-color: var(--bg-color) !important;
+  transition: background-color 1.5s ease;
+}
+
+.clear-fade-2 {
+  background-color: var(--bg-color) !important;
+  transition: background-color 1.4s ease;
+}
+
+.clear-fade-3 {
+  background-color: var(--bg-color) !important;
+  transition: background-color 1.3s ease;
+}
+
+.clear-fade-4 {
+  background-color: var(--bg-color) !important;
+  transition: background-color 1.2s ease;
+}
+
+.clear-fade-5 {
+  background-color: var(--bg-color) !important;
+  transition: background-color 1.1s ease;
+}
+
+.clear-fade-6 {
+  background-color: var(--bg-color) !important;
+  transition: background-color 1s ease;
+}

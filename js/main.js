@@ -4,6 +4,7 @@ function generateGrid(size) {
     gridContainer.classList.add('grid-container');
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+    gridContainer.setAttribute('draggable', 'false');
 
     for (let i = 0; i < (size*size); i++) {
         generateGridCell(gridContainer);
@@ -15,18 +16,32 @@ function generateGridCell(container) {
 
     let gridCell = document.createElement('div');
         gridCell.classList.add('grid-cell');
+        gridCell.onmousedown = (e) => e.target.classList.add('painted-cell');
         gridCell.onmouseover = (e) =>  e.target.classList.add('painted-cell');
         return container.appendChild(gridCell);
 }
 
 function clearGrid() {
-    
-    document.querySelectorAll('.painted-cell').forEach(cell => cell.classList.remove('painted-cell'));
+    document.querySelectorAll('.painted-cell').forEach(cell => {
+        fadeGrid(cell);
+        setTimeout(function () {
+            cell.classList.remove('painted-cell');
+            cell.classList.remove('clear-fade-1');
+            cell.classList.remove('clear-fade-2');
+            cell.classList.remove('clear-fade-3');
+            cell.classList.remove('clear-fade-4');
+            cell.classList.remove('clear-fade-5');
+          }, 1500);
+    });
 }
+
+function fadeGrid(item) {
+    let fadeSpeed = Math.floor(Math.random() * 5)+1;
+    item.classList.add(`clear-fade-${fadeSpeed}`);
+  }
 
 
 function generateNewGrid() {
-    
     let newGridSize = prompt('Insert new grid size');
     if (newGridSize.match(/^[0-9]+$/) === null) newGridSize = 16;
     document.querySelector('.grid-container').remove();
