@@ -1,13 +1,13 @@
 let penColour = 'black';
+let drag = false;
 
 function generateGrid(size) {
-    
     let gridContainer = document.createElement('div');
     gridContainer.classList.add('grid-container');
     gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${size}, 1fr)`;
     gridContainer.setAttribute('draggable', 'false');
-
+    document.querySelector('.container').setAttribute('draggable', 'false');
     for (let i = 0; i < (size*size); i++) {
         generateGridCell(gridContainer);
     }
@@ -15,24 +15,10 @@ function generateGrid(size) {
 }
 
 function generateGridCell(container) {
-
     let gridCell = document.createElement('div');
         gridCell.classList.add('grid-cell');
-        gridCell.onmousedown = (e) => draw(e);
-        gridCell.onmouseover = (e) => draw(e);
+        gridCell.setAttribute('draggable', 'false');
         return container.appendChild(gridCell);
-}
-
-function draw(event) {
-    event.target.classList.add('painted-cell');
-    switch (penColour) {
-        case 'black':
-            return event.target.style.backgroundColor = 'black';
-        case 'rainbow':
-            return event.target.style.backgroundColor = generateRandomColour();
-        default:
-            return event.target.style.backgroundColor = 'black';
-    }
 }
 
 function clearGrid() {
@@ -61,8 +47,33 @@ function generateNewGrid() {
     if (newGridSize.match(/^[0-9]+$/) === null) newGridSize = 16;
     if (newGridSize > 100) newGridSize = 16;
     document.querySelector('.grid-container').remove();
-    
     generateGrid(newGridSize);
+    setupEventListeners();
+}
+function setupEventListeners() {
+    document.querySelector('#clearBtn').onclick = () => clearGrid();
+    document.querySelector('#newGridBtn').onclick = () => generateNewGrid();
+    document.querySelector('#blackPenBtn').onclick = () => setBlackInk();
+    document.querySelector('#rainbowPenBtn').onclick = () => setRainbowInk();
+    document.querySelectorAll('.grid-cell').forEach(cell => {
+        cell.onclick = (e) => draw(e);
+        cell.onmouseover = (e) => draw(e);
+    });
+}
+
+function draw(event) {
+    console.log(event.type);
+    if (event.buttons > 0 || event.type === 'click') {
+    event.target.classList.add('painted-cell');
+    switch (penColour) {
+        case 'black':
+            return event.target.style.backgroundColor = 'black';
+        case 'rainbow':
+            return event.target.style.backgroundColor = generateRandomColour();
+        default:
+            return event.target.style.backgroundColor = 'black';
+    }
+}
 }
 
 function setBlackInk() {
@@ -77,11 +88,9 @@ function generateRandomColour() {
     return `hsl(${Math.random() * 360}, 75%, 50%, 1)`;
 }
 
-(function() {
+function initialise() { 
     generateGrid(16);
-    document.querySelector('#clearBtn').onclick = () => clearGrid();
-    document.querySelector('#newGridBtn').onclick = () => generateNewGrid();
-    document.querySelector('#blackPenBtn').onclick = () => setBlackInk();
-    document.querySelector('#rainbowPenBtn').onclick = () => setRainbowInk();
+    setupEventListeners();
+}
 
-})();
+initialise();
