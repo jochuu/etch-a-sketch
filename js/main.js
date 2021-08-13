@@ -50,26 +50,27 @@ function generateNewGrid() {
     document.querySelector('.grid-container').remove();
     generateGrid(newGridSize);
     setupEventListeners();
+    applySelectedClass(penType);
 }
 
 
 function setupEventListeners() {
-    let penType = '';
+    let pen = '';
     document.querySelector('#clearBtn').onclick = () => clearGrid();
     document.querySelector('#newGridBtn').onclick = () => generateNewGrid();
     document.querySelector('#gridSize').oninput = (e) => document.querySelector('#gridSizeValue').textContent = `${document.querySelector('#gridSize').value} x ${document.querySelector('#gridSize').value}`;
     document.querySelector('#penBtn').onclick = () => {
-        penType = 'default'
-        applySelectedClass(penType);
+        pen = 'default'
+        applySelectedClass(pen);
     };
     document.querySelector('#rainbowPenBtn').onclick = () => {
-        penType = 'rainbow';
-        applySelectedClass(penType);
+        pen = 'rainbow';
+        applySelectedClass(pen);
     }
-    // document.querySelector('#shadePenBtn').onclick = () => penType = 'shade';
+    // document.querySelector('#shadePenBtn').onclick = () => pen = 'shade';
     document.querySelector('#eraserBtn').onclick = () => {
-        penType = 'eraser';
-        applySelectedClass(penType);
+        pen = 'eraser';
+        applySelectedClass(pen);
     }
     document.querySelector('#background').oninput = (e) => {
         document.querySelectorAll('.grid-cell').forEach(cell => {
@@ -78,8 +79,8 @@ function setupEventListeners() {
         }});
     };
     document.querySelectorAll('.grid-cell').forEach(cell => {
-        cell.onmousedown = (e) => draw(e, penType);
-        cell.onmouseover = (e) => draw(e, penType);
+        cell.onmousedown = (e) => draw(e, pen);
+        cell.onmouseover = (e) => draw(e, pen);
         cell.oncontextmenu = (e) => draw(e, 'eraser');
     });
 }
@@ -128,6 +129,7 @@ function generateRandomColour() {
 function initialise() { 
     generateGrid(16);
     setupEventListeners();
+    applySelectedClass(penType);
 }
 
 initialise();
